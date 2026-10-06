@@ -8,6 +8,18 @@ void abertura() {
 	printf("/****************/\n");
 }
 
+//Aqui utilizamos o ponteiro para fazer a váriavel tentativas da função chuta, acessar o valor de tentativas da função Main
+void chuta(char chutes[26], int* tentativas) {
+    char chute;
+    printf("Qual letra ? ");
+    scanf(" %c", &chute);
+
+    chutes[*tentativas] = chute;
+    (*tentativas)++;
+}
+
+
+
 void main() {
 
     setlocale(LC_ALL, "Portuguese");
@@ -24,10 +36,13 @@ void main() {
 	abertura();
 
 	do {
+	    printf("Você já deu %i tentativas\n", tentativas);
 
+        //Imprime a palavra secreta
 		for(int i = 0; i < strlen(palavrasecreta); i++) {
 			int achou = 0;
 
+			//A letra ja foi chutada ?
 			for(int j = 0; j < tentativas; j++) {
 				if(chutes[j] == palavrasecreta[i]) {
 					achou = 1;
@@ -43,15 +58,7 @@ void main() {
 		}
 		printf("\n");
 
-		char chute;
-		printf("Qual letra? ");
-		scanf(" %c", &chute);
-
-		chutes[tentativas] = chute;
-		tentativas++;
-
-
+		chuta(chutes, &tentativas);
 	} while (!acertou && !enforcou);
 
 }
-
