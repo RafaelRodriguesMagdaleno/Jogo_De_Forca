@@ -6,6 +6,33 @@ char palavrasecreta[20];
 char chutes[26];
 int tentativas = 0;
 
+int enforcou() {
+
+    int erros = 0;
+
+    //Vamos fazer o loop de todos os chutes dados
+    for(int i = 0; i < tentativas; i++) {
+
+        int existe = 0;
+
+        //Agora vamos olhar letra a letra da palavra secretra e ber se encontramos o chute aqui
+        for(int j = 0; j < strlen(palavrasecreta); j++) {
+            if(chutes[i] == palavrasecreta[j]) {
+
+                //encontramos, vamos quebrar o loop
+                existe = 1;
+                break;
+            }
+        }
+
+        //Se não encontrou, soma um na quantidade de erros
+        if(!existe) erros ++;
+    }
+
+    //Se tivermos mais do que 5 erros, retornamos 1, caso contrário, retornamos 0
+    return erros >= 5;
+}
+
 void abertura() {
 	printf("/****************/\n");
 	printf("/ Jogo de Forca */\n");
@@ -56,12 +83,13 @@ void escolhepalavra() {
 	sprintf(palavrasecreta, "MELANCIA");
 }
 
+
+
 void main() {
 
     setlocale(LC_ALL, "Portuguese");
 
 	int acertou = 0;
-	int enforcou = 0;
 
 	abertura();
 	escolhepalavra();
@@ -71,8 +99,9 @@ void main() {
 		desenhaforca();
 		chuta();
 
-		tentativas++;
+		enforcou();
+		tentativas ++;
 
-	} while (!acertou && !enforcou);
+	} while (!acertou && !enforcou());
 
 }
