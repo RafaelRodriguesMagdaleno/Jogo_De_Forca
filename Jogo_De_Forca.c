@@ -33,6 +33,21 @@ int ja_chutou(char letra, char* chutes, int tentativas){
     return achou;
 }
 
+void desenha_forca (char* palavrasecreta, char* chutes, int tentativas) {
+
+    printf("Você já deu %i chutes\n", tentativas);
+
+    //Imprime a palavra secreta
+    for(int i = 0; i < strlen(palavrasecreta); i++) {
+
+        if(ja_chutou(palavrasecreta[i], chutes, tentativas)) {
+            printf("%c ", palavrasecreta[i]);
+        }else {
+            printf("_ ");
+        }
+    }
+    printf("\n");
+}
 
 
 void main() {
@@ -51,19 +66,7 @@ void main() {
 	abertura();
 
 	do {
-	    printf("Você já deu %i tentativas\n", tentativas);
-
-        //Imprime a palavra secreta
-		for(int i = 0; i < strlen(palavrasecreta); i++) {
-
-			if(ja_chutou(palavrasecreta[i], chutes, tentativas)) {
-				printf("%c ", palavrasecreta[i]);
-			} else {
-				printf("_ ");
-			}
-		}
-		printf("\n");
-
+        desenha_forca(palavrasecreta, chutes, tentativas);
 		chuta(chutes, &tentativas);
 	} while (!acertou && !enforcou);
 
