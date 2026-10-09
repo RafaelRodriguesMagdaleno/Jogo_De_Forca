@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
+#include "Forca.h"
 
+//Variaveis Globais
 char palavrasecreta[20];
 char chutes[26];
 int chutesdados = 0;
