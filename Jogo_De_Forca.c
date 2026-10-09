@@ -8,29 +8,23 @@ int chutesdados = 0;
 
 int enforcou() {
 
-    int erros = 0;
+	int erros = 0;
 
-    //Vamos fazer o loop de todos os chutes dados
-    for(int i = 0; i < chutesdados; i++) {
+	for(int i = 0; i < chutesdados; i++) {
 
-        int existe = 0;
+		int existe = 0;
 
-        //Agora vamos olhar letra a letra da palavra secretra e ber se encontramos o chute aqui
-        for(int j = 0; j < strlen(palavrasecreta); j++) {
-            if(chutes[i] == palavrasecreta[j]) {
+		for(int j = 0; j < strlen(palavrasecreta); j++) {
+			if(chutes[i] == palavrasecreta[j]) {
+				existe = 1;
+				break;
+			}
+		}
 
-                //encontramos, vamos quebrar o loop
-                existe = 1;
-                break;
-            }
-        }
+		if(!existe) erros++;
+	}
 
-        //Se não encontrou, soma um na quantidade de erros
-        if(!existe) erros ++;
-    }
-
-    //Se tivermos mais do que 5 erros, retornamos 1, caso contrário, retornamos 0
-    return erros >= 5;
+	return erros >= 5;
 }
 
 void abertura() {
@@ -45,12 +39,11 @@ void chuta() {
 	scanf(" %c", &chute);
 
 	chutes[chutesdados] = chute;
+	chutesdados++;
 }
 
 int jachutou(char letra) {
 	int achou = 0;
-
-	 //A letra já foi chutada?
 	for(int j = 0; j < chutesdados; j++) {
 		if(chutes[j] == letra) {
 			achou = 1;
@@ -61,11 +54,20 @@ int jachutou(char letra) {
 	return achou;
 }
 
+int ganhou() {
+	for(int i = 0; i < strlen(palavrasecreta); i++) {
+		if(!jachutou(palavrasecreta[i])) {
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
 void desenhaforca() {
 
 	printf("Você já deu %d chutes\n", chutesdados);
 
-	//Imprime a palavra secreta
 	for(int i = 0; i < strlen(palavrasecreta); i++) {
 
 		if(jachutou(palavrasecreta[i])) {
@@ -83,13 +85,9 @@ void escolhepalavra() {
 	sprintf(palavrasecreta, "MELANCIA");
 }
 
-
-
-void main() {
+int main() {
 
     setlocale(LC_ALL, "Portuguese");
-
-	int acertou = 0;
 
 	abertura();
 	escolhepalavra();
@@ -99,9 +97,6 @@ void main() {
 		desenhaforca();
 		chuta();
 
-		enforcou();
-		chutesdados ++;
-
-	} while (!acertou && !enforcou());
+	} while (!ganhou() && !enforcou());
 
 }
