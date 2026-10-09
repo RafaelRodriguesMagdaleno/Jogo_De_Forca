@@ -84,7 +84,9 @@ void desenhaforca() {
 }
 
 void escolhepalavra() {
-	sprintf(palavrasecreta, "MELANCIA");
+	FILE* f;
+
+	f = fopen("palavras.txt", "r");
 }
 
 void main() {
