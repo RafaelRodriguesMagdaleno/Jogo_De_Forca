@@ -10,27 +10,31 @@ char palavrasecreta[TAMANHO_PALAVRA];
 char chutes[26];
 int chutesdados = 0;
 
+int letraexiste(char letra) {
 
+    for(int j = 0; j< strlen(palavrasecreta); j++) {
+        if(letra == palavrasecreta[j]) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int chuteserrados() {
+    int erros = 0;
+
+    for(int i = 0; i < chutesdados; i++) {
+        if(!letraexiste(chutes[i])) {
+            erros++;
+        }
+    }
+
+    return erros;
+}
 
 int enforcou() {
 
-	int erros = 0;
-
-	for(int i = 0; i < chutesdados; i++) {
-
-		int existe = 0;
-
-		for(int j = 0; j < strlen(palavrasecreta); j++) {
-			if(chutes[i] == palavrasecreta[j]) {
-				existe = 1;
-				break;
-			}
-		}
-
-		if(!existe) erros++;
-	}
-
-	return erros >= 5;
+	return chuteserrados() >= 5;
 }
 
 int ganhou() {
