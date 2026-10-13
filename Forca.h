@@ -2,6 +2,8 @@
 
 #define TAMANHO_PALAVRA 20
 
+int letraexiste(char letra);
+int chuteserrados();
 int enforcou();
 void abertura();
 void chuta();
