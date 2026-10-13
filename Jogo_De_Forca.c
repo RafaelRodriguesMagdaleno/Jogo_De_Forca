@@ -166,6 +166,19 @@ void adicionarpalavra() {
 
         //A função fscanf consegue ler dados de um arquivo
         fscanf(f, "%d", &qtd);
+
+        //Verificando se a palavra já existe no arquivo
+        char palavraarquivo[TAMANHO_PALAVRA];
+
+        for(int i = 0; i < qtd; i++) {
+            fscanf(f, "%s", palavraarquivo);
+
+            if(strcmp(palavraarquivo, novapalavra) == 0) {
+                printf("Essa palavra já existe no jogo!\n");
+                fclose(f);
+                return;
+            }
+        }
         qtd++;
 
         //Fseek muda o ponteiro de posição, recebe três parametros, o arquivo, quantos bytes ele deve andar (Esquerda ou Direita) e de onde ele deve começar(Começo, posição corrente, ou do final do arquivo)
