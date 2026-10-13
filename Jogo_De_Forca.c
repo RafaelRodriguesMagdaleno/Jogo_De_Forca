@@ -6,7 +6,7 @@
 #include "Forca.h"
 
 //Variaveis Globais
-char palavrasecreta[20];
+char palavrasecreta[TAMANHO_PALAVRA];
 char chutes[26];
 int chutesdados = 0;
 
@@ -118,7 +118,7 @@ void adicionarpalavra() {
     scanf(" %c", &quer);
 
     if(quer == 'S') {
-        char novapalavra[20];
+        char novapalavra[TAMANHO_PALAVRA];
 
         printf("Digite a nova palavra, em letras maiúsculas: ");
         scanf("%s", novapalavra);
