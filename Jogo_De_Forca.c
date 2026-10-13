@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <locale.h>
 #include "Forca.h"
 
@@ -8,6 +9,8 @@
 char palavrasecreta[20];
 char chutes[26];
 int chutesdados = 0;
+
+
 
 int enforcou() {
 
@@ -92,6 +95,20 @@ void escolhepalavra() {
         printf("Banco de dados de palavras não disponível\n");
         exit(1);
 	}
+
+	int qtddepalavras;
+	fscanf(f, "%i", &qtddepalavras);
+
+	//gera um número aleatório
+	srand(time(0));
+	int randomico = rand() % qtddepalavras;
+
+	//Lê o arquivo até chegar na na linha desejada
+	for(int i = 0; i <= randomico; i++) {
+        fscanf(f, "%s", palavrasecreta);
+	}
+
+	fclose(f);
 }
 
 void main() {
