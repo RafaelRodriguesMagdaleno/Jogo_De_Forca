@@ -33,6 +33,16 @@ int enforcou() {
 	return erros >= 5;
 }
 
+int ganhou() {
+	for(int i = 0; i < strlen(palavrasecreta); i++) {
+		if(!jachutou(palavrasecreta[i])) {
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
 void abertura() {
 	printf("/****************/\n");
 	printf("/ Jogo de Forca */\n");
@@ -60,16 +70,6 @@ int jachutou(char letra) {
 	return achou;
 }
 
-int ganhou() {
-	for(int i = 0; i < strlen(palavrasecreta); i++) {
-		if(!jachutou(palavrasecreta[i])) {
-			return 0;
-		}
-	}
-
-	return 1;
-}
-
 void desenhaforca() {
 
 	printf("Você já deu %d chutes\n", chutesdados);
@@ -92,7 +92,7 @@ void escolhepalavra() {
 
 	f = fopen("palavras.txt", "r");
 	if(f == 0) {
-        printf("Banco de dados de palavras não disponível\n");
+        printf("Banco de dados de palavras não disponível\n\n");
         exit(1);
 	}
 
@@ -114,7 +114,7 @@ void escolhepalavra() {
 void adicionarpalavra() {
     char quer;
 
-    printf("Você deseja adicionar uma nova palavra no jogo ? (S/N)");
+    printf("Você deseja adicionar uma nova palavra no jogo ? (S/N) ");
     scanf(" %c", &quer);
 
     if(quer == 'S') {
@@ -156,6 +156,7 @@ void adicionarpalavra() {
         fseek(f, 0, SEEK_END);
 
         //escreve a palvra
+        //Colocamos um \n pois o ponteiro nos posiciona bem no final do arquivo, e teoricamente não tem um enter, ent escrevemos um Enter e ai a palavra
         fprintf(f, "\n%s", novapalavra);
 
 
@@ -178,4 +179,5 @@ void main() {
 
 	} while (!ganhou() && !enforcou());
 
+	adicionarpalavra();
 }
