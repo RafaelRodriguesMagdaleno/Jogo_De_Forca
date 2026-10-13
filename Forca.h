@@ -1,6 +1,9 @@
 //Lista de funções que apareceram no arquivo
 
 #define TAMANHO_PALAVRA 20
+#define FACIL 10
+#define MEDIO 8
+#define DIFICIL 5
 
 int letraexiste(char letra);
 int chuteserrados();

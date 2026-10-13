@@ -9,6 +9,26 @@
 char palavrasecreta[TAMANHO_PALAVRA];
 char chutes[26];
 int chutesdados = 0;
+int maxerros = DIFICIL;
+
+void escolhedificuldade() {
+    char opcao;
+
+    do {
+        printf("Escolha a dificuldade:\n");
+        printf("(1) Fácil   - %d chutes\n", FACIL);
+        printf("(2) Médio   - %d chutes\n", MEDIO);
+        printf("(3) Difícil - %d chutes\n", DIFICIL);
+        printf("Opção: ");
+        scanf(" %c", &opcao);
+    } while(opcao < '1' || opcao > '3');
+
+    switch(opcao) {
+        case '1': maxerros = FACIL;   break;
+        case '2': maxerros = MEDIO;   break;
+        case '3': maxerros = DIFICIL; break;
+    }
+}
 
 int letraexiste(char letra) {
 
@@ -34,7 +54,7 @@ int chuteserrados() {
 
 int enforcou() {
 
-	return chuteserrados() >= 5;
+	return chuteserrados() >= maxerros;
 }
 
 int ganhou() {
@@ -208,6 +228,7 @@ void main() {
     setlocale(LC_ALL, "Portuguese");
 
 	abertura();
+	escolhedificuldade();
 	escolhepalavra();
 
 	do {
