@@ -111,6 +111,59 @@ void escolhepalavra() {
 	fclose(f);
 }
 
+void adicionarpalavra() {
+    char quer;
+
+    printf("Você deseja adicionar uma nova palavra no jogo ? (S/N)");
+    scanf(" %c", &quer);
+
+    if(quer == 'S') {
+        char novapalavra[20];
+
+        printf("Digite a nova palavra, em letras maiúsculas: ");
+        scanf("%s", novapalavra);
+
+        //Ponteiro para o arquivo
+        FILE* f;
+
+        //abre o arquivo, se quiser apenas ler, use a função 'r' no final, se quiser escrever no final usamos o 'a'
+
+        //A letra 'W' ela ajuda a escrever em arquivos, mas apenas em arquivos novos, se o arquivo existir, ele apaga o primeiro
+
+        //O 'R+" permite ler e alterar um arquivo
+        f = fopen("palavras.txt", "r+");
+        if(f == 0) {
+            printf("Banco de dados de palavras não disponível\n\n");
+            exit(1);
+        }
+
+        int qtd;
+
+        //A função fscanf consegue ler dados de um arquivo
+        fscanf(f, "%d", &qtd);
+        qtd++;
+
+        //Fseek muda o ponteiro de posição, recebe três parametros, o arquivo, quantos bytes ele deve andar (Esquerda ou Direita) e de onde ele deve começar(Começo, posição corrente, ou do final do arquivo)
+        fseek(f, 0, SEEK_SET);
+
+        //SEEK_CUR : Anda a partir do ponto atual
+        //SEEK_END : Anda a partir do fim do arquivo
+
+        //A função fprintf consegue escrever no arquivo
+        fprintf(f, "%d", qtd);
+
+        //Escreve a palavra nova no final do arquivo
+        fseek(f, 0, SEEK_END);
+
+        //escreve a palvra
+        fprintf(f, "\n%s", novapalavra);
+
+
+        //Fecha o arquivo
+        fclose(f);
+    }
+}
+
 void main() {
 
     setlocale(LC_ALL, "Portuguese");
