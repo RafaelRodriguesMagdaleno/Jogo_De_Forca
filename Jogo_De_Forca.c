@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <locale.h>
 #include "Forca.h"
@@ -87,6 +88,10 @@ void escolhepalavra() {
 	FILE* f;
 
 	f = fopen("palavras.txt", "r");
+	if(f == 0) {
+        printf("Banco de dados de palavras não disponível\n");
+        exit(1);
+	}
 }
 
 void main() {
