@@ -142,7 +142,7 @@ void escolhepalavra() {
 	}
 
 	int qtddepalavras;
-	fscanf(f, "%i", &qtddepalavras);
+	fscanf(f, "%d", &qtddepalavras);
 
 	//gera um número aleatório
 	srand(time(0));
@@ -208,7 +208,7 @@ void adicionarpalavra() {
         //SEEK_END : Anda a partir do fim do arquivo
 
         //A função fprintf consegue escrever no arquivo
-        fprintf(f, "%d", qtd);
+        fprintf(f, "%04d", qtd);
 
         //Escreve a palavra nova no final do arquivo
         fseek(f, 0, SEEK_END);
