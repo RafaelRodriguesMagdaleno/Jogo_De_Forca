@@ -231,6 +231,8 @@ void main() {
 		printf("         _.' '._        \n");
 		printf("        '-------'       \n\n");
 
+		adicionarpalavra();
+
 	} else {
 		printf("\nPuxa, você foi enforcado!\n");
 		printf("A palavra era **%s**\n\n", palavrasecreta);
@@ -253,5 +255,4 @@ void main() {
 		printf("       \\_______/           \n");
 	}
 
-	adicionarpalavra();
 }
