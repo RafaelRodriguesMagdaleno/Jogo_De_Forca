@@ -223,6 +223,30 @@ void adicionarpalavra() {
     }
 }
 
+void salvaranking() {
+    char nome[TAMANHO_NOME];
+
+    printf("Digite seu nome: ");
+    scanf("%s", nome);
+
+    int pontos = 0;
+    if(ganhou()) {
+        pontos = 100 - chuteserrados() * 10;
+    }
+
+    FILE* f;
+    f = fopen("ranking.txt", "a");
+    if(f == 0) {
+        printf("Não foi possível abrir o ranking\n\n");
+        return;
+    }
+
+    fprintf(f, "%s %d\n", nome, pontos);
+    fclose(f);
+
+    printf("%s, sua pontuação de %d pontos foi salva no ranking!\n", nome, pontos);
+}
+
 void main() {
 
     setlocale(LC_ALL, "Portuguese");
@@ -275,5 +299,7 @@ void main() {
 		printf("     \\_         _/         \n");
 		printf("       \\_______/           \n");
 	}
+
+	salvaranking();
 
 }
