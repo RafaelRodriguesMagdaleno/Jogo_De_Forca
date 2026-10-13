@@ -58,6 +58,11 @@ void chuta() {
 	printf("Qual letra? ");
 	scanf(" %c", &chute);
 
+	if(chute < 65 || chute > 90) {
+        printf("Digite apenas letras maiúsculas!\n");
+        return;
+	}
+
 	if(letraexiste(chute)) {
         printf("Você acertou: a palavra tem a letra %c\n\n", chute);
 	}else {
